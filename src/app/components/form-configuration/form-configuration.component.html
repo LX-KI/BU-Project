@@ -1,0 +1,19 @@
+<h2>Form Configuration</h2>
+<div class="config-panel">
+  <table>
+    <tr>
+      <th>Show Field</th>
+      <th>Required Field</th>
+    </tr>
+    <tr *ngFor="let field of fields">
+      <td>
+        <input type="checkbox" [(ngModel)]="field.visible" />
+        {{ field.label }}
+      </td>
+      <td>
+        <input type="checkbox" [(ngModel)]="field.required" [disabled]="!field.visible" />
+      </td>
+    </tr>
+  </table>
+  <button (click)="saveConfig()">Save Changes</button>
+</div>
