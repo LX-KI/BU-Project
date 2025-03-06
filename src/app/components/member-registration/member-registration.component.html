@@ -1,13 +1,33 @@
-<h2>Member Registration</h2>
-<form [formGroup]="form" (ngSubmit)="submitForm()">
-  <ng-container *ngFor="let field of fields">
-    <div *ngIf="field.visible">
-      <label>{{ field.label }}</label>
-      <input [formControlName]="field.name" />
-      <span *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
-        This field is required
-      </span>
+<div class="form-container">
+  <h2>Member Registration</h2>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <ng-container *ngFor="let field of fields">
+      <div *ngIf="field.visible" class="form-group">
+        <label [class.required]="field.required">{{ field.label }}</label>
+        <!-- <input 
+          [formControlName]="field.name"
+          [class.error]="form.get(field.name)?.invalid && form.get(field.name)?.touched"
+        />-->
+        <kendo-textbox style="width: 436px" class="k-textarea" 
+        *ngIf="field.name !== 'address'"
+        [formControlName]="field.name">
+      </kendo-textbox>       
+       <kendo-textarea style="width: 436px;"
+        *ngIf="field.name === 'address'"
+        [formControlName]="field.name">
+      </kendo-textarea>
+        <span 
+          class="error-message" 
+          *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched"
+        >
+          This field is required
+        </span>
+       
+      </div>
+    </ng-container>
+    <div class="button-container">
+
+      <button kendoButton type="submit" look="outline" class="button" [disabled]="form.invalid" > Submit</button>
     </div>
-  </ng-container>
-  <button type="submit">Submit</button>
-</form>
+  </form>
+</div>

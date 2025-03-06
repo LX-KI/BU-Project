@@ -1,19 +1,39 @@
-<h2>Form Configuration</h2>
 <div class="config-panel">
-  <table>
-    <tr>
-      <th>Show Field</th>
-      <th>Required Field</th>
-    </tr>
-    <tr *ngFor="let field of fields">
-      <td>
-        <input type="checkbox" [(ngModel)]="field.visible" />
-        {{ field.label }}
-      </td>
-      <td>
-        <input type="checkbox" [(ngModel)]="field.required" [disabled]="!field.visible" />
-      </td>
-    </tr>
-  </table>
-  <button (click)="saveConfig()">Save Changes</button>
+  <h2>Form Configuration</h2>
+  <kendo-grid
+    [kendoGridBinding]="fields"
+    [rowReorderable]="true"
+    (rowReorder)="onRowReorder($event)"
+    [reorderable]="true"
+    
+  >
+    <kendo-grid-rowreorder-column [width]="40" [lockable]="false">
+      <ng-template kendoGridReorderColumnTemplate></ng-template>
+    </kendo-grid-rowreorder-column>
+    
+    <kendo-grid-column title="Show Field" [width]="50">
+      <ng-template kendoGridCellTemplate let-dataItem>
+         
+          <input type="checkbox" kendoCheckBox [(ngModel)]="dataItem.visible"  (ngModelChange)="onRequiredChange(dataItem)"   />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="label" title="Field Name" [width]="50">
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Required" [width]="60">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input 
+          type="checkbox" 
+          kendoCheckBox
+          [(ngModel)]="dataItem.required" 
+          [disabled]="!dataItem.visible" 
+        />
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+
+  <div class="button-container">
+    <button kendoButton look="flat" (click)="saveConfig()">Save Changes</button>
+  </div>
 </div>

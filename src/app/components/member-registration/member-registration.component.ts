@@ -1,36 +1,46 @@
-import { Component,OnInit} from '@angular/core';
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FieldConfig } from '../../module/field-config/field-config.module';
+import { FormConfigService } from '../../services/form-config.service';
+
 @Component({
   selector: 'app-member-registration',
   templateUrl: './member-registration.component.html',
   styleUrls: ['./member-registration.component.scss']
 })
-
-export class MemberRegistrationComponent implements OnInit{
-  form!:FormGroup;
+export class MemberRegistrationComponent implements OnInit {
+  form!: FormGroup;
   fields: FieldConfig[] = [];
-  constructor(private fb:FormBuilder) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private formConfigService: FormConfigService
+  ) {}
 
   ngOnInit(): void {
-      const saveConfig = localStorage.getItem('formConfig');
-      this.fields = saveConfig ? JSON.parse(saveConfig) : [];
-      const formControls:any = {};
-      this.fields.forEach(field => {
-        formControls[field.name] = field.required ? [null, Validators.required] : null;
-      });
-      this.form = this.fb.group(formControls);
-
+    this.formConfigService.formConfig$.subscribe(fields => {
+      this.fields = fields;
+      this.initForm();
+    });
   }
+
+  private initForm() {
+    const formControls: any = {};
+    this.fields.forEach(field => {
+      formControls[field.name] = [
+        null,
+        field.required ? [Validators.required] : []
+      ];
+    });
+    this.form = this.fb.group(formControls);
+  }
+
   submitForm() {
     if (this.form.valid) {
-      const formData = this.form.value;
-      console.log("formSubmitted",this.form.value);
-      localStorage.setItem('formData', JSON.stringify(formData));
+      console.log("Form submitted:", this.form.value);
       alert('Form submitted successfully');
     }
-    else {
-      console.log('Please fill all the required fields');
-  }
+  this.form.reset();
+
   }
 }
