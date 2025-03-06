@@ -4,30 +4,64 @@
     <ng-container *ngFor="let field of fields">
       <div *ngIf="field.visible" class="form-group">
         <label [class.required]="field.required">{{ field.label }}</label>
-        <!-- <input 
+
+        <!-- Kendo Textbox for non-address fields -->
+        <kendo-textbox 
+          style="width: 436px" 
+          *ngIf="field.name !== 'address'"
           [formControlName]="field.name"
-          [class.error]="form.get(field.name)?.invalid && form.get(field.name)?.touched"
-        />-->
-        <kendo-textbox style="width: 436px" class="k-textarea" 
-        *ngIf="field.name !== 'address'"
-        [formControlName]="field.name">
-      </kendo-textbox>       
-       <kendo-textarea style="width: 436px;"
-        *ngIf="field.name === 'address'"
-        [formControlName]="field.name">
-      </kendo-textarea>
-        <span 
+          (blur)="form.get(field.name)?.markAsTouched()">
+        </kendo-textbox>
+
+        <!-- Kendo Textarea for address field -->
+        <kendo-textarea 
+          style="width: 436px;"
+          *ngIf="field.name === 'address'"
+          [formControlName]="field.name"
+          (blur)="form.get(field.name)?.markAsTouched()">
+        </kendo-textarea>
+
+        <!-- Error messages -->
+        <div 
           class="error-message" 
           *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched"
         >
-          This field is required
-        </span>
-       
+          <!-- Required error -->
+          <span *ngIf="form.get(field.name)?.errors?.['required']">
+            {{ field.label }} is required.
+          </span>
+
+          <!-- Numbers only error (prioritized) -->
+          <span *ngIf="form.get(field.name)?.errors?.['numbersOnly']">
+            Address cannot contain only numbers.
+          </span>
+
+          <!-- Pattern error (only shown if numbersOnly error is not present) -->
+          <span 
+            *ngIf="form.get(field.name)?.errors?.['pattern'] && !form.get(field.name)?.errors?.['numbersOnly']"
+          >
+            <ng-container [ngSwitch]="field.name.toLowerCase()">
+              <span *ngSwitchCase="'email'">Please enter a valid email address.</span>
+              <span *ngSwitchCase="'mobile'">Mobile number must be exactly 10 digits.</span>
+              <span *ngSwitchCase="'name'">Name should not contain numbers.</span>
+              <span *ngSwitchCase="'address'">
+                Address should contain letters and may include numbers, spaces, and special characters (-, _, /, \, .).
+              </span>
+            </ng-container>
+          </span>
+        </div>
       </div>
     </ng-container>
     <div class="button-container">
-
-      <button kendoButton type="submit" look="outline" class="button" [disabled]="form.invalid" > Submit</button>
+      <button 
+        kendoButton 
+        type="submit" 
+        look="outline" 
+        class="button" 
+        [disabled]="form.invalid"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>
