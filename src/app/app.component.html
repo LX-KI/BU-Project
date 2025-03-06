@@ -1,18 +1,20 @@
+<nav>
+  <div class="nav-buttons">
+    <button 
+      routerLink="/member-registration" 
+      routerLinkActive="active"
+    >
+      Member Registration
+    </button>
+    <button 
+      routerLink="/form-configuration" 
+      routerLinkActive="active"
+    >
+      Form Configuration
+    </button>
+  </div>
+</nav>
+
 <div class="container">
-  <nav>
-    <div class="nav-buttons">
-      <button 
-        routerLink="/member-registration" 
-        routerLinkActive="active"
-      >
-        Member Registration
-      </button>
-      <button 
-        routerLink="/form-configuration" 
-        routerLinkActive="active"
-      >
-        Form Configuration
-      </button>
-    </div>
-  </nav>
   <router-outlet></router-outlet>
+</div>

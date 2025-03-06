@@ -32,6 +32,35 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+/* Base Snackbar Styling */
+.custom-snackbar {
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+/* Success Message */
+.success-snackbar {
+  background-color: #4caf50 !important; /* Green */
+  box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
+}
+
+/* Error Message */
+.error-snackbar {
+  background-color: #f44336 !important; /* Red */
+  box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+/* Warning Message */
+.warning-snackbar {
+  background-color: #ff9800 !important; /* Orange */
+  box-shadow: 0px 4px 10px rgba(255, 165, 0, 0.3);
+}
+
 
 h2 {
   font-size: 1.75rem;

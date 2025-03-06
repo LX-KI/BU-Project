@@ -5,16 +5,19 @@
     [rowReorderable]="true"
     (rowReorder)="onRowReorder($event)"
     [reorderable]="true"
-    
   >
-    <kendo-grid-rowreorder-column [width]="40" [lockable]="false">
+    <kendo-grid-rowreorder-column [width]="10" [lockable]="false">
       <ng-template kendoGridReorderColumnTemplate></ng-template>
     </kendo-grid-rowreorder-column>
     
     <kendo-grid-column title="Show Field" [width]="50">
       <ng-template kendoGridCellTemplate let-dataItem>
-         
-          <input type="checkbox" kendoCheckBox [(ngModel)]="dataItem.visible"  (ngModelChange)="onRequiredChange(dataItem)"   />
+        <input 
+          type="checkbox" 
+          kendoCheckBox 
+          [(ngModel)]="dataItem.visible"  
+          (ngModelChange)="onCheckboxChange(); onRequiredChange(dataItem)"
+        />
       </ng-template>
     </kendo-grid-column>
 
@@ -33,7 +36,19 @@
     </kendo-grid-column>
   </kendo-grid>
 
+  <!-- Error Message (only shows when no fields are selected) -->
+  <div *ngIf="isSaveDisabled" class="error-message">
+    <span class="error-text">At least one field must be checked.</span>
+  </div>
+
   <div class="button-container">
-    <button kendoButton look="flat" (click)="saveConfig()">Save Changes</button>
+    <button 
+      kendoButton 
+      look="flat" 
+      (click)="saveConfig()"  
+      [disabled]="isSaveDisabled"
+    >
+      Save Changes
+    </button>
   </div>
 </div>
