@@ -40,6 +40,7 @@
 
       // Grid Content
       .k-grid-content {
+        overflow-y:auto ;
         .k-grid-table {
           background: $white;
 
