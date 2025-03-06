@@ -5,6 +5,7 @@ import { GridComponent } from '@progress/kendo-angular-grid';
 import { GridModule } from "@progress/kendo-angular-grid";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { InputsModule } from "@progress/kendo-angular-inputs";
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-form-configuration',
@@ -14,7 +15,9 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 export class FormConfigurationComponent implements OnInit {
   fields: FieldConfig[] = [];
 
-  constructor(private formConfigService: FormConfigService) {}
+  constructor(private formConfigService: FormConfigService,
+              private notificationService:NotificationService
+  ) {}
 
   ngOnInit() {
     this.formConfigService.formConfig$.subscribe(config => {
@@ -39,9 +42,17 @@ export class FormConfigurationComponent implements OnInit {
     this.fields = [...reorderedFields];
     this.saveConfig();
   }
+  get isSaveDisabled(): boolean {
+    return !this.fields.some(field => field.visible);
+  }
+  onCheckboxChange() {
+    if (this.isSaveDisabled) {
+      // this.notificationService.showError('At least one field must be checked.');
+    }
+  }
 
   saveConfig() {
     this.formConfigService.saveConfig(this.fields);
-    alert('Configuration saved successfully');
+    this.notificationService.showSuccess('Configuration saved successfully');
   }
 }

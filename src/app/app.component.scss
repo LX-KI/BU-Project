@@ -1,36 +1,49 @@
+@import '../styles/variables';
 
-// Navigation styles
 nav {
-  background-color:grey;
-  padding: 1rem;
-  width:auto;
-  margin-bottom: 2rem;
+  width: 100%;
+  background-color:$secondary-color ; // Dark background color
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; // Ensure it's above other elements
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   .nav-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+    padding-right: 1.5rem;
+  }
 
-    button {
-      background-color: #fff;
-      color: #333;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: auto;
+  button {
+    background-color:$background-color; // Button color
+    color: $primary-color;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: auto;
+ 
 
-      &:hover {
-        background-color: #f0f0f0;
-        transform: translateY(-1px);
-      }
+    &:hover {
+      background-color: $background-color ;
+      transform:translateY(-1px);
+    }
 
-      &.active {
-        background-color:#333;
-        color: white;
-      }
+    &.active {
+      background-color:$primary-color; 
+      color: $background-color; 
     }
   }
+
+}
+
+// Add padding to the container to prevent content from going under the navbar
+.container {
+  margin-top: 4rem; // Adjust based on navbar height
+  padding: 1rem;
 }

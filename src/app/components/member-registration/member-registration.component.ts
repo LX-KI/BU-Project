@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-member-registration',
@@ -14,7 +15,8 @@ export class MemberRegistrationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private formConfigService: FormConfigService
+    private formConfigService: FormConfigService,
+    private notificationService:NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +40,8 @@ export class MemberRegistrationComponent implements OnInit {
   submitForm() {
     if (this.form.valid) {
       console.log("Form submitted:", this.form.value);
-      alert('Form submitted successfully');
+      this.notificationService.showSuccess('Form submitted successfully');
+      this.form.reset();
     }
-  this.form.reset();
-
   }
 }

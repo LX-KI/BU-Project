@@ -17,6 +17,13 @@
     margin-bottom: $spacing-lg;
     text-align: center;
   }
+  .error-message {
+    text-align: center; /* Centers the text */
+    color: red; /* Makes the text red */
+    font-weight: bold;
+    margin-top: 10px; /* Adds spacing above */
+  }
+  
 
   kendo-grid {
     width: 100%;
