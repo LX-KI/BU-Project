@@ -1,12 +1,18 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-// Custom validator to check if the address contains only numbers
+/**
+ * Validates that the input value does not contain only numbers.
+ * Returns an error if the value consists entirely of digits.
+ * @returns A validator function that checks for numbers-only input
+ */
 export function numbersOnlyValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
-    if (/^\d+$/.test(value)) {
-      return { numbersOnly: true }; // Return error if the address contains only numbers
+    
+    if (!value) {
+      return null;
     }
-    return null; // No error
+    
+    return /^\d+$/.test(value.toString()) ? { numbersOnly: true } : null;
   };
 }
