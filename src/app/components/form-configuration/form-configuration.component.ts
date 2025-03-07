@@ -43,19 +43,15 @@ export class FormConfigurationComponent implements OnInit {
   get isSaveDisabled(): boolean {
     return !this.fields.some(field => field.visible);
   }
-  onCheckboxChange() {
-    if (this.isSaveDisabled) {
-      // this.notificationService.showError('At least one field must be checked.');
-    }
-  }
-
+  
+  
   saveConfig() {
     this.formConfigService.saveConfig(this.fields);
     this.notificationService.showSuccess('Configuration saved successfully');
         
     setTimeout(() => {
       this.router.navigate(['/member-registration']);
-    }, 1000); // Delay of 1 second to show the notification
+    }, 1000); 
 
   }
 }
