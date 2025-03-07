@@ -2,12 +2,12 @@
 
 nav {
   width: 100%;
-  background-color:$secondary-color ; // Dark background color
+  background-color:$secondary-color ; 
   padding: 1rem 0;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; // Ensure it's above other elements
+  z-index: 1000; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   .nav-buttons {
@@ -18,7 +18,7 @@ nav {
   }
 
   button {
-    background-color:$background-color; // Button color
+    background-color:$background-color; 
     color: $primary-color;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -42,8 +42,7 @@ nav {
 
 }
 
-// Add padding to the container to prevent content from going under the navbar
 .container {
-  margin-top: 4rem; // Adjust based on navbar height
+  margin-top: 4rem; 
   padding: 1rem;
 }
