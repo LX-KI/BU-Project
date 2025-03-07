@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-configuration',
@@ -12,7 +13,8 @@ export class FormConfigurationComponent implements OnInit {
   fields: FieldConfig[] = [];
 
   constructor(private formConfigService: FormConfigService,
-              private notificationService:NotificationService
+              private notificationService:NotificationService,
+              private router:Router
   ) {}
 
   ngOnInit() {
@@ -50,5 +52,10 @@ export class FormConfigurationComponent implements OnInit {
   saveConfig() {
     this.formConfigService.saveConfig(this.fields);
     this.notificationService.showSuccess('Configuration saved successfully');
+        
+    setTimeout(() => {
+      this.router.navigate(['/member-registration']);
+    }, 1000); // Delay of 1 second to show the notification
+
   }
 }

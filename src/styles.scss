@@ -16,10 +16,15 @@ body {
 
 // Container styles
 .container {
+  display: flex
+;
+    justify-content: center;
+    align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  background-color: $white;
+  background-color: $background-color;
   padding: $spacing-xl;
+  height:  auto; 
 }
 
 
@@ -293,7 +298,7 @@ h2 {
 
 // Material Snackbar Override
 .mat-mdc-snack-bar-container {
-  margin-top: 70px !important; // Adjust based on your navbar height
+  margin-top: 80px !important; // Adjust based on your navbar height
   z-index: 999 !important; // Below navbar z-index
 }
 
