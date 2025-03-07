@@ -52,13 +52,19 @@
         </div>
       </div>
     </ng-container>
+
+    <!-- Add general form error message -->
+    <div class="error-message" *ngIf="form?.touched && !hasAnyValue()">
+      Please fill in at least one field before submitting.
+    </div>
+
     <div class="button-container">
       <button 
         kendoButton 
         type="submit" 
         look="outline" 
         class="button" 
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || !hasAnyValue()"
       >
         Submit
       </button>

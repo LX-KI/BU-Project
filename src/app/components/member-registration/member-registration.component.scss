@@ -6,9 +6,10 @@
   }
   
   h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 15px;
+    font-size: $h2-font-size;
+    color: $primary-color;
+    margin-bottom: $spacing-lg;
+    text-align: center;
   }
   
   form {
@@ -45,30 +46,12 @@
   }
   
   .error-message {
-    color: red;
+    color: $error-color;
     font-size: 0.9rem;
-    margin-top: 4px;
+    margin-top: $spacing-sm;
+    text-align: center;
+    font-weight: 500;
   }
-  
-  // button {
-  //   background: #28a745;
-  //   color: white;
-  //   padding: 10px 15px;
-  //   border: none;
-  //   border-radius: 5px;
-  //   font-weight: bold;
-  //   cursor: pointer;
-  //   margin-right: 10px;
-  
-  //   &:hover {
-  //     background: #218838;
-  //   }
-    
-  //   &:disabled {
-  //     opacity: 0.6;
-  //     cursor: not-allowed;
-  //   }
-  // }
   
   .button-container {
     display: flex;

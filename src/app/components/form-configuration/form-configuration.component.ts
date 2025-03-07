@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
-import { GridComponent } from '@progress/kendo-angular-grid';
-import { GridModule } from "@progress/kendo-angular-grid";
-import { ButtonsModule } from "@progress/kendo-angular-buttons";
-import { InputsModule } from "@progress/kendo-angular-inputs";
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router } from '@angular/router';
