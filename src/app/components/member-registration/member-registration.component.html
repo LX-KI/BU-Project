@@ -36,7 +36,7 @@
             Address cannot contain only numbers.
           </span>
 
-          <!-- Pattern error (only shown if numbersOnly error is not present) -->
+          <!-- Pattern error  -->
           <span 
             *ngIf="form.get(field.name)?.errors?.['pattern'] && !form.get(field.name)?.errors?.['numbersOnly']"
           >
@@ -53,7 +53,7 @@
       </div>
     </ng-container>
 
-    <!-- Add general form error message -->
+    <!-- general form error message -->
     <div class="error-message" *ngIf="form?.touched && !hasAnyValue()">
       Please fill in at least one field before submitting.
     </div>
