@@ -6,7 +6,8 @@ import { GridModule } from "@progress/kendo-angular-grid";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { NotificationService } from 'src/app/services/notification.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-form-configuration',
   templateUrl: './form-configuration.component.html',
@@ -16,7 +17,7 @@ export class FormConfigurationComponent implements OnInit {
   fields: FieldConfig[] = [];
 
   constructor(private formConfigService: FormConfigService,
-              private notificationService:NotificationService
+              private notificationService:NotificationService,private router: Router
   ) {}
 
   ngOnInit() {
@@ -53,6 +54,6 @@ export class FormConfigurationComponent implements OnInit {
 
   saveConfig() {
     this.formConfigService.saveConfig(this.fields);
-    this.notificationService.showSuccess('Configuration saved successfully');
+    this.router.navigate(['/member-registration']);
   }
 }

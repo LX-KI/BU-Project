@@ -4,6 +4,7 @@ import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
 import { numbersOnlyValidator } from '../../validators/numbersOnlyValidator'; // Ensure correct import
 import { NotificationService } from 'src/app/services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-member-registration',
@@ -17,7 +18,8 @@ export class MemberRegistrationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formConfigService: FormConfigService,
-    private notificationService:NotificationService
+    private notificationService:NotificationService,
+    private snackBar:MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,11 @@ export class MemberRegistrationComponent implements OnInit {
   submitForm() {
     if (this.form.valid) {
       console.log("Form submitted:", this.form.value);
-      this.notificationService.showSuccess('Form submitted successfully');
+      this.snackBar.open('Form submitted successfully', 'close', {
+        duration: 3000, // Duration in milliseconds
+        verticalPosition: 'top', // Display at the top
+        panelClass: ['success-snackbar'], // Apply custom styling
+      });
       this.form.reset();
     }
   }

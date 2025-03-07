@@ -44,11 +44,24 @@ body {
 }
 
 /* Success Message */
+// .success-snackbar {
+//   background-color: #4caf50 !important; /* Green */
+//   box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
+// }
+/* Success Message */
 .success-snackbar {
-  background-color: #4caf50 !important; /* Green */
-  box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
+   /* Green */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 12px 20px;
+  position: fixed;
+  top: 20px; /* Position at the top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Ensure it's above other content */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 /* Error Message */
 .error-snackbar {
   background-color: #f44336 !important; /* Red */
@@ -107,6 +120,7 @@ h2 {
     box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
   }
 }
+
 
 // Accessibility
 :focus {
