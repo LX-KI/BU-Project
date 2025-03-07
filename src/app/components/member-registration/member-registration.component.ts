@@ -47,9 +47,9 @@ export class MemberRegistrationComponent implements OnInit {
         case 'mobile':
           validators.push(Validators.pattern(/^\d{10}$/));
           break;
-        case 'name':
-          validators.push(Validators.pattern(/^[A-Za-z\s]+$/));
-          break;
+          case 'name':
+            validators.push(Validators.pattern(/^(?! )[A-Za-z]+( [A-Za-z]+)*(?<! )$/));
+            break;
         case 'address':
           validators.push(
             numbersOnlyValidator(),
