@@ -43,7 +43,7 @@
             <ng-container [ngSwitch]="field.name.toLowerCase()">
               <span *ngSwitchCase="'email'">Please enter a valid email address.</span>
               <span *ngSwitchCase="'mobile'">Mobile number must be exactly 10 digits.</span>
-              <span *ngSwitchCase="'name'">Name should not contain numbers.</span>
+              <span *ngSwitchCase="'name'">Name should contain only alphabets.</span>
               <span *ngSwitchCase="'address'">
                 Address should contain letters and may include numbers, spaces, and special characters (-, _, /, \, .).
               </span>

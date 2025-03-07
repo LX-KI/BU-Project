@@ -39,9 +39,7 @@ export class MemberRegistrationComponent implements OnInit {
 
       // Add custom validators based on field name
       switch (field.name.toLowerCase()) {
-        case 'email':
-          validators.push(Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/));
-          break;
+        case 'email':   validators.push(     Validators.pattern(/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) ); break;
         case 'mobile':
           validators.push(Validators.pattern(/^\d{10}$/));
           break;

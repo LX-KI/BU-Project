@@ -300,6 +300,12 @@ h2 {
 .mat-mdc-snack-bar-container {
   margin-top: 80px !important; // Adjust based on your navbar height
   z-index: 999 !important; // Below navbar z-index
+
+  .mdc-snackbar__actions {
+    button {
+      color: rgba(210, 48, 48, 0.763) !important;
+    }
+  }
 }
 
 // Ensure snackbar text is visible
@@ -311,7 +317,7 @@ h2 {
 // Snackbar styles
 .success-snackbar {
   .mdc-snackbar__surface {
-    background-color: #4caf50 !important; // Green for success
+    background-color: $primary-color !important; // Green for success
     color: white !important;
   }
 }
