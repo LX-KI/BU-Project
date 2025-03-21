@@ -6,40 +6,58 @@
         <label [class.required]="field.required">{{ field.label }}</label>
 
         <!-- Kendo Textbox for non-address fields -->
-        <kendo-textbox 
-          style="width: 436px" 
-          *ngIf="field.name !== 'address'"
-          [formControlName]="field.name"
-          (blur)="form.get(field.name)?.markAsTouched()">
-        </kendo-textbox>
+        <div class="input-wrapper">
+          <kendo-textbox 
+            style="width: 436px" 
+            *ngIf="field.name !== 'address'"
+            
+            [formControlName]="field.name"
+            (blur)="form.get(field.name)?.markAsTouched()"
+            (input)="field.name.toLowerCase() === 'mobile' ? handleMobileInput($event) : null"
+            class="custom-input"
+          >
+            <ng-template kendoTextBoxSuffixTemplate>
+              <span 
+                class="clear-icon" 
+                *ngIf="form.get(field.name)?.value"
+                (click)="clearField(field.name)">
+                ✖
+              </span>
+            </ng-template>
+          </kendo-textbox>
+        </div>
 
         <!-- Kendo Textarea for address field -->
-        <kendo-textarea 
-          style="width: 436px;"
-          *ngIf="field.name === 'address'"
-          [formControlName]="field.name"
-          (blur)="form.get(field.name)?.markAsTouched()">
-        </kendo-textarea>
+        <div class="textarea-wrapper">
+          <kendo-textarea 
+            class="custom-textarea"
+            style="width: 436px;"
+            *ngIf="field.name === 'address'"
+            [formControlName]="field.name"
+            (input)="adjustTextareaHeight($event)"
+            (blur)="form.get(field.name)?.markAsTouched()"
+            #textareaField
+          >
+         
+          </kendo-textarea>
+            <span 
+              class="clear-icon clear-textarea" 
+              *ngIf="form.get(field.name)?.value && field.name === 'address'"
+
+              (click)="clearField(field.name)">
+              ✖
+            </span>
+        </div>
 
         <!-- Error messages -->
-        <div 
-          class="error-message" 
-          *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched"
-        >
-          <!-- Required error -->
+        <div class="error-message" *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
           <span *ngIf="form.get(field.name)?.errors?.['required']">
             {{ field.label }} is required.
           </span>
-
-          <!-- Numbers only error (prioritized) -->
           <span *ngIf="form.get(field.name)?.errors?.['numbersOnly']">
             Address cannot contain only numbers.
           </span>
-
-          <!-- Pattern error  -->
-          <span 
-            *ngIf="form.get(field.name)?.errors?.['pattern'] && !form.get(field.name)?.errors?.['numbersOnly']"
-          >
+          <span *ngIf="form.get(field.name)?.errors?.['pattern'] && !form.get(field.name)?.errors?.['numbersOnly']">
             <ng-container [ngSwitch]="field.name.toLowerCase()">
               <span *ngSwitchCase="'email'">Please enter a valid email address.</span>
               <span *ngSwitchCase="'mobile'">Mobile number must be exactly 10 digits.</span>
@@ -53,7 +71,7 @@
       </div>
     </ng-container>
 
-    <!-- general form error message -->
+    <!-- General form error message -->
     <div class="error-message" *ngIf="form?.touched && !hasAnyValue()">
       Please fill in at least one field before submitting.
     </div>
