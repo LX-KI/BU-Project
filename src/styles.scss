@@ -13,7 +13,10 @@ body {
   min-height: 100vh;
   color: $primary-color;
 }
-
+body {
+  background: url('assets/hexagon-bg.png') no-repeat center center fixed;
+  background-size: cover;
+}
 // Container styles
 .container {
   display: flex
@@ -22,7 +25,7 @@ body {
     align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  background-color: $background-color;
+  // background-color: $background-color;
   padding: $spacing-xl;
   height:  auto; 
 }
