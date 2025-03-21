@@ -36,14 +36,14 @@
             Address cannot contain only numbers.
           </span>
 
-          <!-- Pattern error (only shown if numbersOnly error is not present) -->
+          <!-- Pattern error  -->
           <span 
             *ngIf="form.get(field.name)?.errors?.['pattern'] && !form.get(field.name)?.errors?.['numbersOnly']"
           >
             <ng-container [ngSwitch]="field.name.toLowerCase()">
               <span *ngSwitchCase="'email'">Please enter a valid email address.</span>
               <span *ngSwitchCase="'mobile'">Mobile number must be exactly 10 digits.</span>
-              <span *ngSwitchCase="'name'">Name should not contain numbers.</span>
+              <span *ngSwitchCase="'name'">Name should contain only alphabets.</span>
               <span *ngSwitchCase="'address'">
                 Address should contain letters and may include numbers, spaces, and special characters (-, _, /, \, .).
               </span>
@@ -53,7 +53,7 @@
       </div>
     </ng-container>
 
-    <!-- Add general form error message -->
+    <!-- general form error message -->
     <div class="error-message" *ngIf="form?.touched && !hasAnyValue()">
       Please fill in at least one field before submitting.
     </div>

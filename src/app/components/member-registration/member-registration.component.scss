@@ -15,7 +15,8 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: space-around;
+    gap: 0px;
   }
   
   div {
@@ -57,7 +58,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: $spacing-lg;
     
     ::ng-deep {
       .button {

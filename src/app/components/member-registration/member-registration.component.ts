@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
-import { numbersOnlyValidator } from '../../validators/numbersOnlyValidator'; // Ensure correct import
+import { numbersOnlyValidator } from '../../validators/numbersOnlyValidator';
 import { NotificationService } from 'src/app/services/notification.service';
-
 @Component({
   selector: 'app-member-registration',
   templateUrl: './member-registration.component.html',
@@ -17,7 +16,7 @@ export class MemberRegistrationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formConfigService: FormConfigService,
-    private notificationService:NotificationService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -27,46 +26,39 @@ export class MemberRegistrationComponent implements OnInit {
     });
   }
 
-  private initForm() {
-    const formControls: any = {};
+  private initForm(): void {
+    const group: { [key: string]: any } = {};
+    
     this.fields.forEach(field => {
-      const validators = [];
-
-      // Add required validator if the field is required
-      if (field.required) {
-        validators.push(Validators.required);
-      }
-
-      // Add custom validators based on field name
-      switch (field.name.toLowerCase()) {
-        case 'email':
-          validators.push(Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/));
-          break;
-        case 'mobile':
-          validators.push(Validators.pattern(/^\d{10}$/));
-          break;
-        case 'name':
-          validators.push(Validators.pattern(/^[A-Za-z\s]+$/));
-          break;
-        case 'address':
-          validators.push(
-            numbersOnlyValidator(),
-            Validators.pattern(/^(?=.*[A-Za-z])[A-Za-z0-9\s\-_/\\.,]+$/)
-          );
-          break;
-      }
-
-      // Add minimum length validator for all visible fields
       if (field.visible) {
-        validators.push(Validators.minLength(1));
+        const validators = [];
+        
+        if (field.required) {
+          validators.push(Validators.required);
+        }
+        
+        switch (field.name.toLowerCase()) {
+          case 'email':
+            validators.push(Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'));
+            break;
+          case 'mobile':
+            validators.push(Validators.pattern('^[0-9]{10}$'));
+            break;
+          case 'name':
+            validators.push(Validators.pattern('^[a-zA-Z\\s]*$'));
+            break;
+          case 'address':
+            validators.push(numbersOnlyValidator());
+            break;
+        }
+        
+        group[field.name] = ['', validators];
       }
-
-      formControls[field.name] = ['', validators];  // Initialize with empty string instead of null
     });
-    this.form = this.fb.group(formControls);
+    
+    this.form = this.fb.group(group);
   }
 
-  // Add method to check if form has any values
   hasAnyValue(): boolean {
     if (!this.form) return false;
     
@@ -77,8 +69,7 @@ export class MemberRegistrationComponent implements OnInit {
     });
   }
 
-  submitForm() {
-    // Mark all fields as touched to trigger validation messages
+  submitForm(): void {
     Object.keys(this.form.controls).forEach(key => {
       const control = this.form.get(key);
       control?.markAsTouched();
@@ -90,7 +81,6 @@ export class MemberRegistrationComponent implements OnInit {
         return;
       }
       
-      console.log("Form submitted:", this.form.value);
       this.notificationService.showSuccess('Form submitted successfully');
       this.form.reset();
     } else {

@@ -16,10 +16,15 @@ body {
 
 // Container styles
 .container {
+  display: flex
+;
+    justify-content: center;
+    align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  background-color: $white;
+  background-color: $background-color;
   padding: $spacing-xl;
+  height:  auto; 
 }
 
 
@@ -127,7 +132,7 @@ h2 {
       border: none !important ;
       padding: 0.75rem;
       justify-content: center;
-      // border-bottom: 1px solid #ddd;
+     
     }
     
     th {
@@ -293,11 +298,16 @@ h2 {
 
 // Material Snackbar Override
 .mat-mdc-snack-bar-container {
-  margin-top: 70px !important; // Adjust based on your navbar height
-  z-index: 999 !important; // Below navbar z-index
+  margin-top: 80px !important; 
+  z-index: 999 !important; 
+
+  .mdc-snackbar__actions {
+    button {
+      color: rgba(210, 48, 48, 0.763) !important;
+    }
+  }
 }
 
-// Ensure snackbar text is visible
 .mat-mdc-snack-bar-container .mdc-snackbar__surface {
   background-color: rgba($primary-color, 0.9) !important;
   color: $white !important;
@@ -306,14 +316,14 @@ h2 {
 // Snackbar styles
 .success-snackbar {
   .mdc-snackbar__surface {
-    background-color: #4caf50 !important; // Green for success
+    background-color: $primary-color !important; 
     color: white !important;
   }
 }
 
 .error-snackbar {
   .mdc-snackbar__surface {
-    background-color: #f44336 !important; // Red for error
+    background-color: #f44336 !important; 
     color: white !important;
   }
 }
