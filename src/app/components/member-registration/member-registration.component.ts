@@ -4,7 +4,6 @@ import { FieldConfig } from '../../module/field-config/field-config.module';
 import { FormConfigService } from '../../services/form-config.service';
 import { numbersOnlyValidator } from '../../validators/numbersOnlyValidator';
 import { NotificationService } from 'src/app/services/notification.service';
-
 @Component({
   selector: 'app-member-registration',
   templateUrl: './member-registration.component.html',
