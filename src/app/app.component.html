@@ -1,23 +1,22 @@
 <nav>
-  <div class="nav-buttons">
-    <div class="nav-left">
+  <div class="nav-container">
       <img src="assets/logo.png" alt="Logo" class="logo" />
-    <button 
+    <div class="nav-buttons">
+      <button 
       routerLink="/member-registration" 
       routerLinkActive="active"
-    >
+      >
       Member Registration
     </button>
     <button 
-      routerLink="/form-configuration" 
-      routerLinkActive="active"
+    routerLink="/form-configuration" 
+    routerLinkActive="active"
     >
-      Form Configuration
-    </button>
-    </div>
-  </div>
+    Form Configuration
+  </button>
+</div>
+</div>
 </nav>
-
 <div class="container">
   <router-outlet></router-outlet>
 </div>

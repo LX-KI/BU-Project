@@ -10,23 +10,24 @@ nav {
   z-index: 1000; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px; 
+  }
+
   .nav-buttons {
     display: flex;
     justify-content: flex-end;
-    gap: 4rem;
+    gap: 1rem;
     padding-right: 1.5rem;
     
-  }
-
-  .nav-left {
-    display: flex;
-    align-items: center;
   }
 
   .logo {
     width: 55px;  
     height: 55px;
-    margin-right: 700px;
   }
   button {
     background-color:$background-color; 
