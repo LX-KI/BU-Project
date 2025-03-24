@@ -21,7 +21,7 @@ export class FormConfigurationComponent implements OnInit {
     this.formConfigService.formConfig$.subscribe(config => {
       this.fields = config.length ? config : [
         { name: 'name', label: 'Name', visible: true, required: true },
-        { name: 'mobile', label: 'Mobile', visible: true, required: false },
+        { name: 'mobilenumber', label: 'Mobile Number', visible: true, required: false },
         { name: 'email', label: 'Email', visible: false, required: true },
         { name: 'address', label: 'Address', visible: false, required: false }
       ];

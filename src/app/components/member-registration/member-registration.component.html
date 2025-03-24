@@ -10,10 +10,10 @@
           <kendo-textbox 
             style="width: 436px" 
             *ngIf="field.name !== 'address'"
-            
+            (input)="field.name === 'mobilenumber' ? restrictMobileLength($event) : null"
+            (keypress)="field.name === 'mobilenumber' ? blockAlphabets($event) : null"
             [formControlName]="field.name"
             (blur)="form.get(field.name)?.markAsTouched()"
-            (input)="field.name.toLowerCase() === 'mobile' ? handleMobileInput($event) : null"
             class="custom-input"
           >
             <ng-template kendoTextBoxSuffixTemplate>
@@ -48,12 +48,18 @@
               ✖
             </span>
         </div>
-
+        
         <!-- Error messages -->
         <div class="error-message" *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
           <span *ngIf="form.get(field.name)?.errors?.['required']">
             {{ field.label }} is required.
           </span>
+          <span *ngIf="form.get(field.name)?.errors?.['containsAlphabets']">
+            Alphabets and speacial charecters cannot be written in the mobile number.
+          </span>
+          <span *ngIf="form.get(field.name)?.errors?.['allSameDigits']">
+            Mobile number cannot contain all the same digits (e.g., 0000000000, 1111111111).
+          </span>          
           <span *ngIf="form.get(field.name)?.errors?.['numbersOnly']">
             Address cannot contain only numbers.
           </span>
@@ -70,7 +76,6 @@
         </div>
       </div>
     </ng-container>
-
     <!-- General form error message -->
     <div class="error-message" *ngIf="form?.touched && !hasAnyValue()">
       Please fill in at least one field before submitting.
